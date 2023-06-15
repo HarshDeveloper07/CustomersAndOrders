@@ -1,0 +1,57 @@
+﻿@using CustomersAndOrders.Entities;
+
+@model List<CustomersViewModel>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>PhoneNumber</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserId</td>
+                <td>@user.Name</td>
+                <td>@user.Address</td>
+                <td>@user.PhoneNumber</td>
+                <td>
+                    <a href="@Url.Action("OrderList", "Customers", new { userId = user.UserId })" class="btn btn-secondary">Order List</a>
+                    
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        table th,
+        table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #e2e2e2;
+        }
+</style>

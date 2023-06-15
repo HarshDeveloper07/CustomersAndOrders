@@ -1,0 +1,82 @@
+﻿
+@using CustomersAndOrders.Entities;
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@model CustomerOrderViewModel
+
+@*CustomerId : @Model.UserId
+CustomerName: @Model.Name
+Phone: @Model.PhoneNumber*@
+
+<table>
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Name </th>
+            <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.UserId</td>
+            <td>@Model.Name</td>
+            <td>@Model.PhoneNumber</td>
+        </tr>
+    </tbody>
+
+</table>
+<br />
+<br />
+<table>
+
+
+    <thead>
+        <tr>
+            <th>Order Id</th>
+            <th>Price</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+
+
+    <tbody>
+
+
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>@item.OrderId</td>
+                <td>@item.OrderPrice</td>
+                <td>@item.OrderDate</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        table th,
+        table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #e2e2e2;
+        }
+</style>
