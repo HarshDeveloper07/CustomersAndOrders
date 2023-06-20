@@ -1,0 +1,137 @@
+﻿.tableLayout {
+    border: 1px solid #ddd;
+    display: table;
+    clear: both;
+    width: 100%;
+    font-family: Verdana, Arial, sans-serif;
+    `` font-size: 100%;
+}
+
+    .tableLayout .tableHeader {
+        display: table-header-group;
+    }
+
+        .tableLayout .tableHeader ul {
+            /*z-index: 999;*/
+            white-space: nowrap;
+            border-top: 0px;
+            font-weight: bold;
+            /*background-color: #dddddd !important;*/
+        }
+
+    .tableLayout input[checkType="rowcheck"] {
+        text-align: center;
+        width: 21px;
+    }
+
+    .tableLayout .tableBody {
+        display: table-row-group;
+        overflow: auto !important;
+        max-height: 300px !important;
+    }
+
+    .tableLayout ul {
+        border: 1px solid #ddd;
+        display: table-row;
+    }
+
+
+        .tableLayout ul li {
+            border: 1px solid #ddd;
+            padding: 0px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+            .tableLayout ul li input {
+                border: 0px;
+                width: 100%;
+            }
+
+            .tableLayout ul li textarea {
+                border: 0px;
+                width: 100%;
+            }
+
+            .tableLayout ul li select {
+                border: 0px;
+                width: 100%;
+            }
+
+.tableNoRecord {
+    position: relative;
+    height: 33px;
+}
+
+    .tableNoRecord li {
+        text-align: center;
+        width: 100%;
+        position: absolute;
+    }
+
+.dirtyRowHighlight ul[dirty="true"],
+.dirtyRowHighlight ul[dirty="true"] li
+/*
+.dirtyRowHighlight ul[dirty="true"] li input,
+.dirtyRowHighlight ul[dirty="true"] li textarea,
+*/
+/*.dirtyRowHighlight ul[dirty="true"] li select*/ {
+    /*background: #FFDDA9 !important;*/
+}
+
+.tableLayout.dirtyRowHighlight .tableBody ul[dirty="true"]:nth-child(odd) li {
+    /*background: #FFDDA9 !important;*/
+}
+
+.tableLayout.dirtyRowHighlight .tableBody ul.row-deleted[dirty="true"]:nth-child(odd) li {
+    background: #f6e2e2 !important;
+}
+
+.headerRow th {
+    border-top: 0;
+    font-weight: bold;
+    /*background-color: #ddd!important;*/
+    /*border:1px solid #bfbbbb !important;*/
+}
+
+.NewHeaderRow {
+    font-size: 15px !important;
+    font-family: Verdana,Arial,sans-serif;
+    font-weight: bold;
+    /*background-color: #ddd !important;*/
+}
+
+/*This css used for wraped Filename;*/
+.tableLayout ul li[name="FileName"] a {
+    width: 150px !important;
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+
+/*Start tables input is editable (blue) and not editable in white*/
+.table > tbody > tr > td,
+.table > tbody > tr > td > input[disabled],
+.table > tbody > tr > td > textarea[disabled] {
+    background: #fff0 !important;
+}
+    /* $cellEditable: #b6e1f6;*/
+    .table > tbody > tr > td > input, .table > tbody > tr > td > textarea {
+        background: #add8fb !important;
+    }
+
+.tableLayout .tableBody > ul > li,
+.tableLayout .tableBody > ul > li > input[disabled],
+.tableLayout .tableBody > ul > li > textarea[disabled] {
+    background: #fff0 !important;
+}
+
+    .tableLayout .tableBody > ul > li > input,
+    .tableLayout .tableBody > ul > li > textarea {
+        background: #add8fb !important;
+    }
+
+.fa-sort-icon {
+    font-size: 12px;
+    color: #696969
+}

@@ -21,10 +21,10 @@ namespace CustomersAndOrders.Manager
 
             var customerViewModels = customers.Select(c => new CustomersViewModel
             {
-                UserId = c.UserId,
+                CustomerId = c.CustomerId,
                 Name = $"{c.FirstName} {c.LastName}",
-                Address = c.User_Address,
-                PhoneNumber = c.User_PhoneNumber
+                Address = c.Customer_Address,
+                PhoneNumber = c.Customer_Address
             }).ToList();
 
             return customerViewModels;

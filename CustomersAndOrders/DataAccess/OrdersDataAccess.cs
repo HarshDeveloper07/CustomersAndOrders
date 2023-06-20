@@ -16,7 +16,7 @@ namespace CustomersAndOrders.DataAccess
         {
             using (var OrderContext = new CustomersAndOrdersDBEntities())
             {
-                return OrderContext.Orders.Where(x => x.UserId == id).ToList();
+                return OrderContext.Orders.Where(x => x.CustomerId == id).ToList();
             }
         }
     }

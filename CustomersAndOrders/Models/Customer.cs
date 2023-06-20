@@ -20,11 +20,13 @@ namespace CustomersAndOrders.Models
             this.Orders = new HashSet<Order>();
         }
     
-        public int UserId { get; set; }
+        public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string User_Address { get; set; }
-        public string User_PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Email_Password { get; set; }
+        public string Customer_Address { get; set; }
+        public string Customer_PhoneNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

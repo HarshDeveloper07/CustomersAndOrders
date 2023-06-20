@@ -160,25 +160,25 @@
     <Compile Include="Manager\CustomersManager.cs" />
     <Compile Include="Manager\OrdersManager.cs" />
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>CustomersAndOrdersDBModel.tt</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomersAndOrdersDBModel.Context.cs">
+    <Compile Include="Models\CustomersAndOrdersModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomersAndOrdersDBModel.Context.tt</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomersAndOrdersDBModel.cs">
+    <Compile Include="Models\CustomersAndOrdersModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomersAndOrdersDBModel.tt</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CustomersAndOrdersDBModel.Designer.cs">
+    <Compile Include="Models\CustomersAndOrdersModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CustomersAndOrdersDBModel.edmx</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>CustomersAndOrdersDBModel.tt</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\CustomersViewModel.cs" />
@@ -203,15 +203,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\CustomersAndOrdersDBModel.Context.tt">
+    <Content Include="JS\appTable.Js" />
+    <Content Include="Models\CustomersAndOrdersModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CustomersAndOrdersDBModel.Context.cs</LastGenOutput>
-      <DependentUpon>CustomersAndOrdersDBModel.edmx</DependentUpon>
+      <DependentUpon>CustomersAndOrdersModel.edmx</DependentUpon>
+      <LastGenOutput>CustomersAndOrdersModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\CustomersAndOrdersDBModel.tt">
+    <Content Include="Models\CustomersAndOrdersModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CustomersAndOrdersDBModel.edmx</DependentUpon>
-      <LastGenOutput>CustomersAndOrdersDBModel.cs</LastGenOutput>
+      <DependentUpon>CustomersAndOrdersModel.edmx</DependentUpon>
+      <LastGenOutput>CustomersAndOrdersModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -219,12 +220,12 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\CustomersAndOrdersDBModel.edmx">
+    <EntityDeploy Include="Models\CustomersAndOrdersModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CustomersAndOrdersDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>CustomersAndOrdersModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\CustomersAndOrdersDBModel.edmx.diagram">
-      <DependentUpon>CustomersAndOrdersDBModel.edmx</DependentUpon>
+    <Content Include="Models\CustomersAndOrdersModel.edmx.diagram">
+      <DependentUpon>CustomersAndOrdersModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -237,6 +238,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Style\appTable.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,7 +255,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

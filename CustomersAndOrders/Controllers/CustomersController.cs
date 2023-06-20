@@ -19,8 +19,16 @@ namespace CustomersAndOrders.Controllers
 
         public ActionResult Index()
         {
-            var customerViewModels = _customerManager.GetAllCustomers();
-            return View(customerViewModels);
+            return View();
+        }
+
+        public ActionResult GetCustomerData()
+        {
+            // Logic to retrieve customer data and format it as needed
+            var customerData = _customerManager.GetAllCustomers();
+
+            // Return the customer data as JSON
+            return Json(customerData, JsonRequestBehavior.AllowGet);
         }
 
 

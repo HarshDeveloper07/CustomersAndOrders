@@ -15,7 +15,7 @@ namespace CustomersAndOrders.Models
     public partial class Order
     {
         public int OrderId { get; set; }
-        public int UserId { get; set; }
+        public int CustomerId { get; set; }
         public decimal OrderPrice { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
     

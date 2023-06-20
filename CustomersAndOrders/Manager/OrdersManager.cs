@@ -29,10 +29,10 @@ namespace CustomersAndOrders.Manager
             {
                 customerViewModels = new CustomerOrderViewModel()
                 {
-                    UserId = customerObj.UserId,
+                    CustomerId = customerObj.CustomerId,
                     Name = $"{customerObj.FirstName} {customerObj.LastName}",
-                    Address = customerObj.User_Address,
-                    PhoneNumber = customerObj.User_PhoneNumber
+                    Address = customerObj.Customer_Address,
+                    PhoneNumber = customerObj.Customer_PhoneNumber
                 };
                 if (customerObj.Orders != null && customerObj.Orders.Any())
                 {

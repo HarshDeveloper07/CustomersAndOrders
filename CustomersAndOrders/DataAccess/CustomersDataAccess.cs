@@ -29,7 +29,7 @@ namespace CustomersAndOrders.DataAccess
         {
             using (var Customercontext = new CustomersAndOrdersDBEntities())
             {
-                return Customercontext.Customers.Where(x=>x.UserId == customerId).Include(x=>x.Orders).FirstOrDefault();
+                return Customercontext.Customers.Where(x=>x.CustomerId == customerId).Include(x=>x.Orders).FirstOrDefault();
             }
         }
 

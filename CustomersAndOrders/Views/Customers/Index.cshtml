@@ -1,57 +1,116 @@
 ﻿@using CustomersAndOrders.Entities;
+@using System.Web.Script.Serialization;
+@*@model CustomersViewModel*@
 
-@model List<CustomersViewModel>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamically Create Table</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="~/JS/appTable.js"></script>
 
-<table>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>PhoneNumber</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.UserId</td>
-                <td>@user.Name</td>
-                <td>@user.Address</td>
-                <td>@user.PhoneNumber</td>
-                <td>
-                    <a href="@Url.Action("OrderList", "Customers", new { userId = user.UserId })" class="btn btn-secondary">Order List</a>
-                    
-                </td>
+    <link rel="stylesheet" href="~/Style/appTable.css" />
+    <script>
 
-            </tr>
+        var invoiceCustomerSiteAppTable;
+
+        $(document).ready(function () {
+            
+            //bindInvoiceCustomerSites();
+            $('#loadTableButton').click(function () {
+               bindInvoiceCustomerSites();
+            })
+        });
+
+        function bindInvoiceCustomerSites() {
+            
+            jAjaxCall('GET', '@Url.Content("~/Customers/GetCustomerData")', '', 'application/json; charset=utf-8', function (response) {
+                createInvoiceCustomerSiteTable(response);
+            });
         }
-    </tbody>
-</table>
+
+        function createInvoiceCustomerSiteTable(result) {
+            var invoiceCustomerSiteConfig = {
+                id: 'invoiceCustomerSiteTableId', //table id
+                header: true,
+                rowCalculation: true,
+                columns: [
+                    { text: 'CustomerId', fieldName: 'CustomerId', width: '1%', hidden: true },
+                    { text: 'Name', fieldName: 'Name', width: '15%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Name',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteNameSortOrder').val() },
+                    { text: 'Address', fieldName: 'Address', width: '18%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Address',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteAddressSortOrder').val() },
+                    { text: 'PhoneNumber', fieldName: 'PhoneNumber', width: '13%', allowSorting: "SortDataBasedOnSelectedColumn(event,'PhoneNumber',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSitePhoneNumberSortOrder').val() },
+
+                ],
+                data: result
+            };
+            invoiceCustomerSiteAppTable = new dpTable(invoiceCustomerSiteConfig);
+            var appTable = invoiceCustomerSiteAppTable.html();
+            $('#customerSiteAssociationDiv').html($(appTable));
+
+        }
+
+        function jAjaxCall(method, url, querystring, returnType, callBackFunction) {
+            // var contenttype = ise(returnType) ? 'application/x-www-form-urlencoded; charset=UTF-8' : returnType;
+            var contenttype = (returnType != "" && returnType != null) ? 'application/x-www-form-urlencoded; charset=UTF-8' : returnType;
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: querystring,
+                datatype: 'json',
+                
+                contentType: contenttype,
+                success: function (response) {
+
+                    if (response.OK != undefined && response.OK == false) {
+                        jAlert.error({ title: '', text: response.Message });
+                    } else {
+
+                        if (callBackFunction != undefined) {
+                            eval(callBackFunction)(response);
+                        } else {
+
+                            return response;
+                        }
+                    }
+                }
+            });
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <button type="button" class="btn btn-dark btn-primary" style="cursor:pointer" id="loadTableButton" >Load Table</button>
+
+    <div class="topspace" id="customerSiteAssociationDiv">
+
+    </div>
+
+    <input type="hidden" id="CustomerSiteNameSortOrder" value="1" />
+    <input type="hidden" id="CustomerSiteAddressSortOrder" value="1" />
+    <input type="hidden" id="CustomerSitePhoneNumberSortOrder" value="1" />
+
+</body>
+</html>
+
 <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
+    .close {
+        float: right;
+        font-size: 24px !important;
+        font-weight: bold;
+        line-height: 1;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: .2;
+        /*filter: alpha(opacity=20);*/
     }
 
-        table th,
-        table td {
-            padding: 8px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #f2f2f2;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        table tr:hover {
-            background-color: #e2e2e2;
-        }
+    #invoiceCustomerSiteTableId thead tr th:nth-child(1),
+    #invoiceCustomerSiteTableId tbody tr td:nth-child(1) {
+        width: 2% !important;
+        text-align: center;
+    }
 </style>
