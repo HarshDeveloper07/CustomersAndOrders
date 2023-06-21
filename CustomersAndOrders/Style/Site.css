@@ -1,0 +1,705 @@
+﻿body {
+}
+/* styles for validation helpers */
+#background {
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #000000;
+    z-index: 9999;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.2;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+
+.btn {
+    font-size: 15px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 0px !important;
+}
+
+/* Helper classes */
+.mTop5 {
+    margin-top: 5px;
+}
+
+.mBottom5 {
+    margin-bottom: 5px;
+}
+
+.mLeft5 {
+    margin-left: 5px;
+}
+
+.mRight5 {
+    margin-right: 5px;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+#header {
+    padding: 2px;
+    padding-bottom: 5px;
+}
+
+#body-content {
+    padding-bottom: 60px; /* Height of the footer element */
+}
+
+#footer {
+    background: #EEEEEE;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: center;
+    border-top: #000000 1px;
+}
+
+
+
+.field-validation-error {
+    color: red;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid red;
+}
+
+.select-validation-error {
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: red;
+    font-size: 1.1em;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*set opacity and z-index value form popups*/
+.popUpOpacityAndZindex {
+    opacity: 0.7 !important;
+}
+
+.input-form-with-border {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    padding: 9px 19px 14px;
+    position: relative;
+}
+
+.search-result-display {
+    margin-top: 30px;
+}
+
+.table.dataTable.no-footer, table.dataTable thead th, table.dataTable thead td {
+    border-bottom: 1px solid #ddd !important;
+    border-top: 1px solid #ddd !important;
+    min-width: 50px;
+}
+
+#revenueAndMealsDataTable form input {
+    height: auto !important;
+    line-height: 24px;
+    padding: 0 !important;
+    text-align: left !important;
+}
+
+    #revenueAndMealsDataTable form input:focus {
+        text-align: left !important;
+    }
+
+.top-nav {
+    background-color: white !important;
+    margin-bottom: 5px;
+    height: 33px;
+    z-index: 9999;
+}
+
+.form-group div {
+    margin-left: 5px;
+}
+
+#content > ul > li {
+    background-color: #ddd;
+    border-radius: 5px 5px 0px 0px;
+    margin: 2px 2px 0px 0px;
+}
+
+.highLightSubTotal {
+    font-weight: bold;
+}
+
+.nonEditableTd {
+    background-color: #eeeeee;
+}
+
+.textRightAlignTd {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.btn-box {
+    margin: 2px 0px;
+    overflow: hidden;
+}
+
+.validation-error {
+    border: 1px solid red !important;
+}
+
+/*For AutoComplete UI*/
+.ui-corner-all {
+    -moz-border-radius: 4px 4px 4px 4px;
+}
+
+.ui-widget {
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 15px;
+}
+
+.ui-menu {
+    display: block;
+    float: left;
+    list-style: none outside none;
+    margin: 0;
+    padding: 2px;
+}
+
+.ui-autocomplete {
+    cursor: default;
+    position: absolute;
+    height: 200px;
+    overflow: scroll;
+}
+
+.ui-menu .ui-menu-item {
+    clear: left;
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+    .ui-menu .ui-menu-item a {
+        display: block;
+        padding: 3px 3px 3px 3px;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: Green;
+    }
+
+        .ui-menu .ui-menu-item a:hover {
+            display: block;
+            padding: 3px 3px 3px 3px;
+            text-decoration: none;
+            color: White;
+            cursor: pointer;
+            background-color: ButtonText;
+        }
+
+.ui-widget-content a {
+    color: #222222;
+}
+/*For AutoComplete UI*/
+
+/*menu selction*/
+
+.aciveMenu {
+    background-color: rgba(36, 82, 105, 1);
+}
+
+.navbar-nav > li > a:hover, .navbar-brand:hover {
+    /*color: #ffffff;*/
+    background-color: rgba(36, 82, 105, 1) !important;
+}
+
+.navbar-nav > li > a:hover, .navbar-brand:hover {
+    /*color: #ffffff;*/
+    background-color: rgba(36, 82, 105, 1) !important;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: rgba(36, 82, 105, 1) !important;
+}
+/*menu Selection*/
+.login-details {
+    background-color: #e6e6e6;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-left: 5px;
+    z-index: 9999999;
+    min-width: 185px;
+}
+
+    .login-details .navbar-nav > li > a {
+        color: #000;
+        padding-bottom: 8px;
+        padding-top: 4px;
+    }
+
+    .login-details .navbar-nav, .login-details .navbar-nav li {
+        width: 100%;
+    }
+
+        .login-details .navbar-nav > li > a:hover, .login-details .navbar-brand:hover, .nav .open > a, .login-details .nav .open > a:hover, .login-details .nav .open > a:focus {
+            background: none !important;
+        }
+
+    .login-details .navbar-nav {
+        margin: auto !important;
+    }
+
+        .login-details .navbar-nav > li > a .caret {
+            float: right;
+            margin-top: 10px;
+        }
+
+.calculation, .numbersOnly, .numberOnly, .decimalOnly, .decimalsOnly, .decimalOnlyWithRound4 {
+    text-align: right;
+}
+
+.paddingLeft {
+    padding-left: 5px;
+}
+
+::-ms-clear {
+    display: none;
+}
+
+.headerFixedindex thead th {
+    z-index: 999;
+    white-space: nowrap;
+    border-top: 0px;
+    background-color: #dddddd !important;
+}
+
+.scrollheightdiv {
+    /*border-top: 1px solid #ccc;*/
+    /*max-height:617px;*/
+    min-height: 125px;
+}
+
+.expenseDiv {
+    margin-top: 10px;
+    clear: both;
+    overflow: auto !important;
+}
+
+.addScroll {
+    overflow: auto !important;
+}
+
+
+#expensesTypeDistrictDataTable tr[dirty="true"],
+#expensesTypeDistrictDataTable tr[dirty="true"] td,
+#expensesTypePersonalDataTable tr[dirty="true"],
+#expensesTypePersonalDataTable tr[dirty="true"] td,
+#expensesTypeSfeDataTable tr[dirty="true"],
+#expensesTypeSfeDataTable tr[dirty="true"] td {
+    /*background: #FFDDA9 !important;*/
+}
+
+.projectionbodyclass tbody tr td {
+    font-size: 13px;
+}
+
+.projectionbodyclass thead tr th {
+    font-size: 14px;
+}
+
+.cellClass {
+    background: #FFDDA9 none repeat scroll 0 0;
+}
+
+.required label {
+    font-weight: bold;
+}
+
+    .required label:after {
+        color: #e32;
+        content: ' *';
+        display: inline;
+    }
+
+.pre {
+    background-color: transparent;
+    overflow-y: auto;
+    max-height: 50px;
+    padding: 0;
+    border: 0;
+    margin: inherit;
+    white-space: pre-wrap;
+}
+
+.AltRowTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    /* provide some minimal visual accomodation for IE8 and below */
+    .AltRowTable tbody tr:nth-child(odd) .nonEditableTd {
+        background: #ffffff !important;
+        border: 0 !important;
+        cursor: pointer;
+    }
+
+    .AltRowTable tbody tr:nth-child(even) .nonEditableTd {
+        background: #EAE3E3 !important;
+        border: 0 !important;
+        cursor: pointer;
+    }
+
+    .AltRowTable tbody tr:hover:nth-child(odd) .nonEditableTd {
+        background: #dad4d4 !important;
+    }
+
+    .AltRowTable tbody tr:hover:nth-child(even) .nonEditableTd {
+        background: #dad4d4 !important;
+    }
+
+.pagination {
+    margin: 10px 0 0 0;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding-top: 0px !important;
+}
+
+.navbar {
+    margin-bottom: -5px !important;
+}
+
+.voidbutton {
+    color: rgb(80,80,80);
+}
+
+.topspace {
+    margin-top: 5px;
+}
+
+/*For Projection Tooltip*/
+#ProjectionDetailAccordion td {
+    /*color: #900;*/
+    text-decoration: none;
+}
+
+    #ProjectionDetailAccordion td:hover {
+        /*color: red;*/
+        position: relative;
+    }
+
+    #ProjectionDetailAccordion td[data-title]:hover:after {
+        content: attr(data-title);
+        padding: 4px 8px;
+        color: #ffffff;
+        font-weight: bold;
+        position: absolute;
+        left: 25%;
+        top: 100%;
+        white-space: nowrap;
+        z-index: 20px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 0px 0px 4px #222;
+        -webkit-box-shadow: 0px 0px 4px #222;
+        box-shadow: 0px 0px 4px #222;
+        background-image: -moz-linear-gradient(top, #337AB7, #337AB7);
+        background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #337AB7),color-stop(1, #337AB7));
+        background-image: -webkit-linear-gradient(top, #337AB7, #337AB7);
+        background-image: -moz-linear-gradient(top, #337AB7, #337AB7);
+        background-image: -ms-linear-gradient(top, #337AB7, #337AB7);
+    }
+
+.ui-datepicker.ui-widget {
+    z-index: 999999999 !important;
+}
+
+/*#ui-datepicker-div button.ui-datepicker-current {display: none;}*/
+
+#budgetLaborDetailDataTable {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: auto !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    overflow: visible;
+}
+
+#AcrossDistrictExpenseEditModal form input:disabled {
+    color: #A9A9A9 !important;
+}
+
+.expenseDropBox .btn-box {
+    overflow: visible;
+}
+
+
+/*Testing*/
+
+.sticky-header {
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    position: static;
+    top: -100px;
+    /*padding: 10px;*/
+}
+
+.body-content {
+    height: 5000px;
+}
+
+.sticky-header.sticky {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.5);
+}
+
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10.5px 12px !important;
+}
+
+.login-details .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 6px 12px !important;
+}
+
+
+#mainMealRevenueDiv .btn {
+    padding: 6px 9px;
+}
+
+.fyCombo .dropdown-menu > li > a {
+    padding: 3px 10px;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding-top: 2px !important;
+}
+
+.table td {
+    font-size: 13px;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 4px !important
+}
+
+table.dataTable tbody tr:nth-child(odd) td {
+    background-color: #f0f0f0 !important;
+}
+
+.tableLayout .tableBody ul:nth-child(odd) li {
+    background-color: #f0f0f0 !important;
+}
+
+.table tbody tr:nth-child(odd) td {
+    background-color: #f0f0f0 !important;
+}
+
+.tableLayout ul li {
+    /*font-size: 13px;*/
+    padding: 4px !important
+}
+
+.tableLayout tr td {
+    padding: 4px !important
+}
+
+input {
+    padding: 0px 0px;
+}
+
+.budget-rev-table {
+    table-layout: fixed;
+}
+
+    .budget-rev-table td, .budget-rev-table th {
+        word-wrap: break-word;
+        white-space: normal !important;
+    }
+
+.budget-local-rev th:nth-child(6) {
+    width: 8.6% !important
+}
+
+.budget-federal-rev th:nth-child(6) {
+    width: 8.6% !important
+}
+
+.budget-other-rev th:nth-child(6) {
+    width: 8.6% !important
+}
+
+.budget-csurplus-rev th:nth-child(6) {
+    width: 7.4% !important;
+}
+
+.budget-psfe-rev th:nth-child(6) {
+    width: 8.6% !important
+}
+
+.budget-totalexpense-rev th:nth-child(6) {
+    width: 7.4% !important;
+}
+/*End tables input CSS*/
+/*Backgroud colors for enabled and disabled input*/
+
+.editable-form-control:disabled,
+.editable-controls-container .bootstrap-select .btn-default:disabled,
+.tableLayout .tableBody > ul > li > input:disabled,
+.tableLayout .tableBody > ul > li > select:disabled,
+.tableLayout .tableBody > ul > li > select > option {
+    background: #fff !important;
+}
+
+.editable-form-control,
+.editable-controls-container .bootstrap-select .btn-default,
+.tableLayout .tableBody > ul > li > input,
+.tableLayout .tableBody > ul > li > select {
+    background: #add8fb !important;
+}
+
+.importLabelRowDropDown {
+    width: 120px;
+}
+
+#importExportScheduleDataTable .btn-group.bootstrap-select {
+    width: 150px !important;
+}
+
+.miscellaneous-creadit-amount {
+    color: red;
+}
+
+.span-divider {
+    position: relative;
+    margin: 0 5px 0 2px;
+}
+
+    .span-divider::after {
+        content: '';
+        display: block;
+        border-left: 2px solid black;
+        height: 20px;
+        position: absolute;
+        right: 0;
+        top: 0px;
+    }
+
+.expense-export .btn-group.bootstrap-select.show-tick {
+    width: 100% !important;
+}
+
+.expense-export .monthPicker {
+    height: 32px;
+}
+
+.expense-export .col-sm-7, .expense-export .col-sm-2, .expense-export .col-sm-1, .expense-export .col-sm-3, .expense-export .col-sm-4, .expense-export .col-sm-5 {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.expense-export .btn-control-by-label {
+    margin-top: 22px;
+}
+
+#hourlyLaborPayPeriodModal .bootstrap-select {
+    width: 100%;
+}
+
+.option-is-disabled {
+    color: red !important;
+}
+
+.table-row-in-active {
+    color: red !important;
+}
+
+.payroll-export .btn-group.bootstrap-select.show-tick {
+    width: 100% !important;
+}
+
+.payroll-export .monthPicker {
+    height: 32px;
+}
+
+.payroll-export .col-sm-7, .payroll-export .col-sm-2, .payroll-export .col-sm-1 {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.payroll-export .btn-control-by-label {
+    margin-top: 22px;
+}
+
+.padding-left-none {
+    padding-left: 0 !important;
+}
+
+.padding-right-none {
+    padding-right: 0 !important;
+}
+
+.ui-autocomplete {
+    z-index: 999999999 !important;
+}
+
+.invoice-edit-form .col-sm-2 {
+    padding-right: 0px;
+    width: 18%;
+}
+
+    .invoice-edit-form .col-sm-2.action-button {
+        padding-right: 0px;
+        width: 28% !important;
+    }
+
+a:focus {
+    outline: none !important;
+}
