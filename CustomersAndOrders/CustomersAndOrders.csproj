@@ -240,6 +240,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Style\appTable.css" />
     <Content Include="Style\bootstrap-custom.css" />
+    <Content Include="Style\common.css" />
     <Content Include="Style\Site.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

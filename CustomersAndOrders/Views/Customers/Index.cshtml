@@ -1,6 +1,6 @@
 ﻿@using CustomersAndOrders.Entities;
 @using System.Web.Script.Serialization;
-@*@model CustomersViewModel*@
+@model CustomersViewModel
 
 
 <!DOCTYPE html>
@@ -10,14 +10,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="~/JS/appTable.js"></script>
 
-    <link rel="stylesheet" href="~/Style/Site.css" />
+    @*<link rel="stylesheet" href="~/Style/Site.css" />*@
     <link rel="stylesheet" href="~/Style/appTable.css" />
+    @*<link rel="stylesheet" href="~/Style/common.css"/>*@
     <script>
 
         var invoiceCustomerSiteAppTable;
 
         $(document).ready(function () {
-            
+
             //bindInvoiceCustomerSites();
             $('#loadTableButton').click(function () {
                bindInvoiceCustomerSites();
@@ -25,10 +26,45 @@
         });
 
         function bindInvoiceCustomerSites() {
-            
-            jAjaxCall('GET', '@Url.Content("~/Customers/GetCustomerData")', '', 'application/json; charset=utf-8', function (response) {
+
+            jAjaxCall('GET', '@Url.Content("~/Customers/GetCustomerData/")', '', 'application/json; charset=utf-8', function (response) {
                 createInvoiceCustomerSiteTable(response);
             });
+        }
+
+
+        function openInvoiceCustomerSitePopup(invoiceCustomerSiteId)
+        {
+           if (invoiceCustomerSiteId > 0) {
+               $("#addeditCustomerSiteLabel").text('Edit Customer Site Mapping');
+           }
+           else {
+               $("#addeditCustomerSiteLabel").text('Add  Site Mapping');
+           }
+
+           var customerSiteViewEntity =
+
+           {
+
+               InvoiceCustomerSiteId: invoiceCustomerSiteId
+
+           };
+           var jsonData = JSON.stringify(customerSiteViewEntity, null, 2);
+           /*var token = $('[name=__RequestVerificationToken]').val();*/
+           jAjaxCall('POST', '@Url.Content("~/Customers/GetCustomerData/")', jsonData, 'application/json; charset=utf-8', function (response) {
+            $("#divCustomerAddEditSiteModalBody").html(response);
+           //here data is whatever your WebService.asmx/getList returned
+           //populate your dropdown here with your $.each w/e
+            $("#CustomerSiteAssociationModal").show();
+            $("#CustomerSiteAssociationModal").modal();
+            $(".modal-open").css("overflow", "hidden");
+           });
+        }
+
+        function refreshPageSiteList() {
+            $(".modal-open").css("overflow", "auto");
+            $(".modal-open").css("padding-right", "0px");
+            bindInvoiceCustomerSites();
         }
 
         function createInvoiceCustomerSiteTable(result) {
@@ -41,7 +77,20 @@
                     { text: 'Name', fieldName: 'Name', width: '15%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Name',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteNameSortOrder').val() },
                     { text: 'Address', fieldName: 'Address', width: '18%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Address',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteAddressSortOrder').val() },
                     { text: 'PhoneNumber', fieldName: 'PhoneNumber', width: '13%', allowSorting: "SortDataBasedOnSelectedColumn(event,'PhoneNumber',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSitePhoneNumberSortOrder').val() },
-
+                    {
+                        text: '', fieldName: 'Edit', width: '2%', renderer:
+                            function (data, element) {
+                                if (data.InvoiceCustomerSiteId > 0) {
+                                    $(element).html('<div style="cursor:pointer; color: #2cc5c9;" class="glyphicon glyphicon-edit" onClick="openInvoiceCustomerSitePopup(\'' + data.InvoiceCustomerSiteId + '\')"></div>');
+                                }
+                            }
+                    },
+                    {
+                        text: '', fieldName: 'IsDeleteAllowed', width: '2%', renderer:
+                            function (data, element) {
+                                $(element).html('<div style="cursor: pointer; color: #C9302C;" class="glyphicon glyphicon-remove btn-customer-site-delete"></div>');
+                            }
+                    }
                 ],
                 data: result
             };
@@ -49,7 +98,34 @@
             var appTable = invoiceCustomerSiteAppTable.html();
             $('#customerSiteAssociationDiv').html($(appTable));
 
+            //attching click event to cross button
+            $(".btn-customer-site-delete").click(function () {
+                var invoiceCustomerSiteId = $(this).closest('ul').find("li[name='InvoiceCustomerSiteId']").text();
+                DeleteInvoiceCustomerSite(invoiceCustomerSiteId);
+            });
+
         }
+
+         //to delete vendor site association
+         function DeleteInvoiceCustomerSite(invoiceCustomerSiteId) {
+             bootbox.confirm(window.AlertMessages.ConfirmForDelete, function (result) {
+                 if (result) {
+                     if (invoiceCustomerSiteId != "" && invoiceCustomerSiteId != null) {
+                         jAlert.error({ title: '', text: 'Invalid  site association' });
+                     }
+                     var jsonData = JSON.stringify({
+                         invoiceCustomerSiteId: invoiceCustomerSiteId,
+                     }, null, 2);
+         
+                     //var token = $('[name=__RequestVerificationToken]').val();
+                     jAjaxCall('POST', '@Url.Content("~/Vendor/DeleteInvoiceVendorSite/")', jsonData, 'application/json; charset=utf-8', function (response) {
+                         jAlert.success({ title: window.AlertMessages.DeleteSuccess, text: '' });
+                         refreshPageSiteList();
+                     });
+                 }
+             });
+        }
+
 
         function jAjaxCall(method, url, querystring, returnType, callBackFunction) {
             // var contenttype = ise(returnType) ? 'application/x-www-form-urlencoded; charset=UTF-8' : returnType;
@@ -60,7 +136,7 @@
                 type: method,
                 data: querystring,
                 datatype: 'json',
-                
+
                 contentType: contenttype,
                 success: function (response) {
 
@@ -84,10 +160,28 @@
     </script>
 </head>
 <body>
-    <button type="button" class="btn btn-dark btn-primary" style="cursor:pointer" id="loadTableButton" >Load Table</button>
 
+    <div class="pull-right">
+        <button type="button" class="btn btn-success" tabindex="3" style="cursor: pointer; margin-bottom: 10px; margin-right:10px;" onclick="openCustomerVendorSitePopup(0) "><i class="fa fa-plus">&nbsp;Add</i></button>
+    </div>
+
+    <button type="button" class="btn btn-dark btn-primary" style="cursor:pointer" id="loadTableButton">Load Table</button>
+    <br />
     <div class="topspace" id="customerSiteAssociationDiv">
 
+    </div>
+
+    <div class="modal fade" id="CustomerSiteAssociationModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="addeditCustomerSiteLabel">
+        <div class="modal-dialog" style="margin-top: 138px;width:70%;" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close closepop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="addeditCustomerSiteLabel"></h4>
+                </div>
+                <div id="divCustomerAddEditSiteModalBody" class="modal-body">
+                </div>
+            </div>
+        </div>
     </div>
 
     <input type="hidden" id="CustomerSiteNameSortOrder" value="1" />
