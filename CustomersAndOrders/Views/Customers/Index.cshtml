@@ -10,55 +10,68 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="~/JS/appTable.js"></script>
 
-    @*<link rel="stylesheet" href="~/Style/Site.css" />*@
+
     <link rel="stylesheet" href="~/Style/appTable.css" />
-    @*<link rel="stylesheet" href="~/Style/common.css"/>*@
+    @*<link rel="stylesheet" href="~/fontawesome-free-6.4.0-web/css/fontawesome.css" />*@
+    @*<link rel="stylesheet" href="~/fontawesome-free-6.4.0-web/css/fontawesome.min.css" />*@
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+
+
+    @*<script src="~/fontawesome-free-6.4.0-web/js/fontawesome.js"></script>*@
+    @*<script src="~/fontawesome-free-6.4.0-web/js/fontawesome.min.js"></script>*@
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script>
 
-        var invoiceCustomerSiteAppTable;
+        var customerAppTable;
 
         $(document).ready(function () {
 
             //bindInvoiceCustomerSites();
             $('#loadTableButton').click(function () {
-               bindInvoiceCustomerSites();
+               bindCustomers();
             })
         });
 
-        function bindInvoiceCustomerSites() {
+        function bindCustomers() {
 
-            jAjaxCall('GET', '@Url.Content("~/Customers/GetCustomerData/")', '', 'application/json; charset=utf-8', function (response) {
-                createInvoiceCustomerSiteTable(response);
+            jAjaxCall('GET', '@Url.Content("~/Customers/Get")', '', 'application/json; charset=utf-8', function (response) {
+                createCustomerTable(response);
             });
         }
 
 
-        function openInvoiceCustomerSitePopup(invoiceCustomerSiteId)
-        {
-           if (invoiceCustomerSiteId > 0) {
-               $("#addeditCustomerSiteLabel").text('Edit Customer Site Mapping');
-           }
-           else {
-               $("#addeditCustomerSiteLabel").text('Add  Site Mapping');
-           }
+        function openCustomerPopup(CustomerId) {
+            debugger;
+            if (CustomerId > 0) {
+                debugger;
+                $("#addeditCustomerLabel").text('Edit Customer');
+                jAjaxCall('GET', '/Customers/Edit?customerId=' + CustomerId, '', 'application/json; charset=utf-8', function (response) {
+                    debugger;
+                    //$("#divCustomerAddEditModalBody").html(response);
+                    $("#customerModal").modal();
+                    $("#customerModal").show();
+                    if ($("#customerModal").hasClass("in") == false) {
+                        $("#customerModal").addClass("in");
+                    }
+                    $(".modal-open").css("overflow", "hidden");
+                });
+            }
+            //else {
+            //    $("#addeditCustomerLabel").text('Add Customer')
+            //}
 
-           var customerSiteViewEntity =
+            //var customerViewEntity =
+            //{
+            //    customerId: CustomerId
+            //};
 
-           {
+            //var jsonData = JSON.stringify(customerViewEntity, null, 2);
+            /*var token = $('[name=__RequestVerificationToken]').val();*/
 
-               InvoiceCustomerSiteId: invoiceCustomerSiteId
-
-           };
-           var jsonData = JSON.stringify(customerSiteViewEntity, null, 2);
-           /*var token = $('[name=__RequestVerificationToken]').val();*/
-           jAjaxCall('POST', '@Url.Content("~/Customers/GetCustomerData/")', jsonData, 'application/json; charset=utf-8', function (response) {
-            $("#divCustomerAddEditSiteModalBody").html(response);
-           //here data is whatever your WebService.asmx/getList returned
-           //populate your dropdown here with your $.each w/e
-            $("#CustomerSiteAssociationModal").show();
-            $("#CustomerSiteAssociationModal").modal();
-            $(".modal-open").css("overflow", "hidden");
-           });
+                //here data is whatever your WebService.asmx/getList returned
+                //populate your dropdown here with your $.each w/e
         }
 
         function refreshPageSiteList() {
@@ -67,60 +80,63 @@
             bindInvoiceCustomerSites();
         }
 
-        function createInvoiceCustomerSiteTable(result) {
-            var invoiceCustomerSiteConfig = {
-                id: 'invoiceCustomerSiteTableId', //table id
+        function createCustomerTable(result) {
+            var customerConfig = {
+                id: 'customerTableId', //table id
                 header: true,
                 rowCalculation: true,
                 columns: [
                     { text: 'CustomerId', fieldName: 'CustomerId', width: '1%', hidden: true },
-                    { text: 'Name', fieldName: 'Name', width: '15%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Name',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteNameSortOrder').val() },
-                    { text: 'Address', fieldName: 'Address', width: '18%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Address',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSiteAddressSortOrder').val() },
-                    { text: 'PhoneNumber', fieldName: 'PhoneNumber', width: '13%', allowSorting: "SortDataBasedOnSelectedColumn(event,'PhoneNumber',invoiceCustomerSiteAppTable,'customerSiteAssociationDiv');", sortOrder: $('#CustomerSitePhoneNumberSortOrder').val() },
+                    { text: 'Name', fieldName: 'Name', width: '15%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Name',customerAppTable,'customerDiv');", sortOrder: $('#CustomerNameSortOrder').val() },
+                    { text: 'Address', fieldName: 'Address', width: '18%', allowSorting: "SortDataBasedOnSelectedColumn(event,'Address',customerAppTable,'customerDiv');", sortOrder: $('#CustomerAddressSortOrder').val() },
+                    { text: 'PhoneNumber', fieldName: 'PhoneNumber', width: '13%', allowSorting: "SortDataBasedOnSelectedColumn(event,'PhoneNumber',customerAppTable,'customerDiv');", sortOrder: $('#CustomerPhoneNumberSortOrder').val() },
                     {
                         text: '', fieldName: 'Edit', width: '2%', renderer:
                             function (data, element) {
-                                if (data.InvoiceCustomerSiteId > 0) {
-                                    $(element).html('<div style="cursor:pointer; color: #2cc5c9;" class="glyphicon glyphicon-edit" onClick="openInvoiceCustomerSitePopup(\'' + data.InvoiceCustomerSiteId + '\')"></div>');
+                                if (data.CustomerId > 0) {
+                                    $(element).html('<div style="cursor:pointer; color: #2cc5c9;" class="glyphicon glyphicon-edit" onClick="openCustomerPopup(\'' + data.CustomerId + '\')"></div>');
                                 }
                             }
                     },
                     {
                         text: '', fieldName: 'IsDeleteAllowed', width: '2%', renderer:
+
                             function (data, element) {
-                                $(element).html('<div style="cursor: pointer; color: #C9302C;" class="glyphicon glyphicon-remove btn-customer-site-delete"></div>');
+                                if (data.CustomerId > 0) {
+                                    $(element).html('<div style="cursor: pointer; color: #C9302C;" class="glyphicon glyphicon-remove btn-customer-delete"></div>');
+                                }
                             }
                     }
                 ],
                 data: result
             };
-            invoiceCustomerSiteAppTable = new dpTable(invoiceCustomerSiteConfig);
-            var appTable = invoiceCustomerSiteAppTable.html();
-            $('#customerSiteAssociationDiv').html($(appTable));
+            customerAppTable = new dpTable(customerConfig);
+            var appTable = customerAppTable.html();
+            $('#customerDiv').html($(appTable));
 
             //attching click event to cross button
-            $(".btn-customer-site-delete").click(function () {
-                var invoiceCustomerSiteId = $(this).closest('ul').find("li[name='InvoiceCustomerSiteId']").text();
-                DeleteInvoiceCustomerSite(invoiceCustomerSiteId);
+            $(".btn-customer-delete").click(function () {
+                var CustomerId = $(this).closest('ul').find("li[name='CustomerId']").text();
+                DeleteCustomer(CustomerId);
             });
 
         }
 
-         //to delete vendor site association
-         function DeleteInvoiceCustomerSite(invoiceCustomerSiteId) {
+         // delete customer
+         function DeleteCustomer(CustomerId) {
              bootbox.confirm(window.AlertMessages.ConfirmForDelete, function (result) {
                  if (result) {
-                     if (invoiceCustomerSiteId != "" && invoiceCustomerSiteId != null) {
+                     if (CustomerId != "" && CustomerId != null) {
                          jAlert.error({ title: '', text: 'Invalid  site association' });
                      }
                      var jsonData = JSON.stringify({
-                         invoiceCustomerSiteId: invoiceCustomerSiteId,
+                         customerId: CustomerId,
                      }, null, 2);
-         
+
                      //var token = $('[name=__RequestVerificationToken]').val();
-                     jAjaxCall('POST', '@Url.Content("~/Vendor/DeleteInvoiceVendorSite/")', jsonData, 'application/json; charset=utf-8', function (response) {
+                     jAjaxCall('GET', '@Url.Content("~/Vendor/DeleteInvoiceVendorSite/")', jsonData, 'application/json; charset=utf-8', function (response) {
                          jAlert.success({ title: window.AlertMessages.DeleteSuccess, text: '' });
-                         refreshPageSiteList();
+                         refreshPageList();
                      });
                  }
              });
@@ -162,31 +178,51 @@
 <body>
 
     <div class="pull-right">
-        <button type="button" class="btn btn-success" tabindex="3" style="cursor: pointer; margin-bottom: 10px; margin-right:10px;" onclick="openCustomerVendorSitePopup(0) "><i class="fa fa-plus">&nbsp;Add</i></button>
+        <button type="button" class="btn btn-success" tabindex="3" style="cursor: pointer; margin-bottom: 10px; margin-right:10px;" onclick="openCustomerPopup(0) "><i class="fa fa-plus">&nbsp;Add</i></button>
     </div>
 
     <button type="button" class="btn btn-dark btn-primary" style="cursor:pointer" id="loadTableButton">Load Table</button>
     <br />
-    <div class="topspace" id="customerSiteAssociationDiv">
+    <div class="topspace" id="customerDiv">
 
     </div>
 
-    <div class="modal fade" id="CustomerSiteAssociationModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="addeditCustomerSiteLabel">
+    <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="addeditCustomerLabel">
         <div class="modal-dialog" style="margin-top: 138px;width:70%;" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header style="justify-content:center;">
                     <button type="button" class="close closepop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="addeditCustomerSiteLabel"></h4>
+                    <h4 class="modal-title"  id="addeditCustomerLabel"></h4>
                 </div>
-                <div id="divCustomerAddEditSiteModalBody" class="modal-body">
+
+                <div id="divCustomerAddEditModalBody" class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="Name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="Address">Address:</label>
+                            <input type="text" class="form-control" id="address" name="Address">
+                        </div>
+                        <div class="form-group">
+                            <label for="PhoneNumber">Phone Number:</label>
+                            <input type="text" class="form-control" id="phone" name="PhoneNumber">
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <input type="hidden" id="CustomerSiteNameSortOrder" value="1" />
-    <input type="hidden" id="CustomerSiteAddressSortOrder" value="1" />
-    <input type="hidden" id="CustomerSitePhoneNumberSortOrder" value="1" />
+    <input type="hidden" id="CustomerNameSortOrder" value="1" />
+    <input type="hidden" id="CustomerAddressSortOrder" value="1" />
+    <input type="hidden" id="CustomerPhoneNumberSortOrder" value="1" />
 
 </body>
 </html>

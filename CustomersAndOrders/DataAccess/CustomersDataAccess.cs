@@ -33,6 +33,14 @@ namespace CustomersAndOrders.DataAccess
             }
         }
 
+        public Customer GetCustomerOnly(int customerId)
+        {
+            using (var Customercontext = new CustomersAndOrdersDBEntities())
+            {
+                return Customercontext.Customers.Where(x => x.CustomerId == customerId).FirstOrDefault();
+            }
+        }
+
     }
 
 }

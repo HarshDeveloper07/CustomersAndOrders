@@ -22,7 +22,7 @@ namespace CustomersAndOrders.Controllers
             return View();
         }
 
-        public ActionResult GetCustomerData()
+        public ActionResult Get()
         {
             // Logic to retrieve customer data and format it as needed
             var customerData = _customerManager.GetAllCustomers();
@@ -31,6 +31,13 @@ namespace CustomersAndOrders.Controllers
             return Json(customerData, JsonRequestBehavior.AllowGet);
         }
 
+        //[HttpPost]
+        public ActionResult Edit(int customerId)
+        {
+            var customerData = _customerManager.GetCustomerById(customerId);
+            return Json(customerData,JsonRequestBehavior.AllowGet);
+
+        }
 
         public ActionResult OrderList(int userId)
         {

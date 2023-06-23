@@ -1,8 +1,11 @@
 ﻿using CustomersAndOrders.DataAccess;
 using CustomersAndOrders.Entities;
+using CustomersAndOrders.Models;
 using System.Collections.Generic;
 using System.Data.Odbc;
 using System.Linq;
+using System.Net;
+using System.Xml.Linq;
 
 namespace CustomersAndOrders.Manager
 {
@@ -28,6 +31,24 @@ namespace CustomersAndOrders.Manager
             }).ToList();
 
             return customerViewModels;
+        }
+
+        public CustomersViewModel GetCustomerById(int customerId)
+        {
+            var customerViewModel = new CustomersViewModel();
+            var customerObj = _customersDataAccess.GetCustomerOnly(customerId);
+
+            if(customerObj != null)
+            {
+                customerViewModel = new CustomersViewModel()
+                {
+                    CustomerId = customerObj.CustomerId,
+                    Name = $"{customerObj.FirstName} {customerObj.LastName}",
+                    Address = customerObj.Customer_Address,
+                    PhoneNumber = customerObj.Customer_PhoneNumber
+                };
+            }
+            return customerViewModel;
         }
 
     }

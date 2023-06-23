@@ -29,6 +29,8 @@
 }
  * @return {TypeName}
  */
+
+ 
 function dpTable(tableConfig) {
     var self = this;
 
